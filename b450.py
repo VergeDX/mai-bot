@@ -1,6 +1,7 @@
 import base64
 from enum import Enum
 
+import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import Response
 
@@ -37,3 +38,8 @@ async def b450(b450: B450Enum, username: str):
     # https://stackoverflow.com/questions/55873174/how-do-i-return-an-image-in-fastapi
     image_bytes: bytes = base64.b64decode(image_to_base64(img))
     return Response(content=image_bytes, media_type="image/png")
+
+
+if __name__ == '__main__':
+    # https://fastapi.tiangolo.com/tutorial/debugging/
+    uvicorn.run(app, host="0.0.0.0", port=8080)  # port=8000)
